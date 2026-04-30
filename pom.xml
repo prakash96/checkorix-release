@@ -46,7 +46,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.checkorix.server.CheckorixServer</mainClass>
+                            <mainClass>com.checkorix.CheckorixServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
