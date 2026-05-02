@@ -3,6 +3,7 @@ package com.checkorix.handler;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 
 import com.checkorix.model.HttpRequestModel;
 import com.checkorix.service.HttpExecutor;
@@ -57,6 +58,7 @@ public class ExecuteHandler implements HttpHandler {
 
 			try {
 				String err = "{\"error\":\"" + e.getMessage() + "\"}";
+				exchange.getResponseHeaders().put("content-type", Arrays.asList("application/json"));
 				exchange.sendResponseHeaders(500, err.length());
 				exchange.getResponseBody().write(err.getBytes());
 				exchange.close();
