@@ -1,10 +1,7 @@
 package com.checkorix.handler.db;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.checkorix.utils.DbUtil;
@@ -35,20 +32,25 @@ public class TablesHandler implements HttpHandler {
                     req.get("username"),
                     req.get("password"))) {
 
-                DatabaseMetaData meta = conn.getMetaData();
+               /* DatabaseMetaData meta = conn.getMetaData();
                 ResultSet rs = meta.getTables(null, null, "%", new String[]{"TABLE"});
 
                 List<String> tables = new ArrayList<>();
                 while (rs.next()) {
                     tables.add(rs.getString("TABLE_NAME"));
-                }
-
-                Utils.write(ex, tables);
+                }*/
+            	
+            	Map<String, Object> success = new HashMap<>();
+            	success.put("success", true);
+                Utils.write(ex, success);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            Utils.write(ex, List.of());
+            Map<String, Object> failure = new HashMap<>();
+        	failure.put("success", false);
+        	failure.put("error", e.getMessage());
+            Utils.write(ex, failure, 400);
         }
     }
 }

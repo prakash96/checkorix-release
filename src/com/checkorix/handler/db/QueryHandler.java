@@ -68,7 +68,7 @@ public class QueryHandler implements HttpHandler {
 
                     for (int i = 1; i <= colCount; i++) {
                         String colName = meta.getColumnLabel(i);
-                        Object value = rs.getObject(i);
+                        Object value = rs.getString(i);
 
                         row.put(colName, value);
                     }
@@ -81,7 +81,7 @@ public class QueryHandler implements HttpHandler {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Utils.write(ex, error(e.getMessage()));
+            Utils.write(ex, error(e.getMessage()), 400);
         }
     }
 

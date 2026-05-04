@@ -21,4 +21,14 @@ public class Utils {
         ex.getResponseBody().write(resp);
         ex.close();
     }
+    
+    public static void write(HttpExchange ex, Object obj, int statusCode) throws IOException {
+        byte[] resp = mapper.writeValueAsBytes(obj);
+
+        ex.getResponseHeaders().add("Content-Type", "application/json");
+
+        ex.sendResponseHeaders(statusCode, resp.length);
+        ex.getResponseBody().write(resp);
+        ex.close();
+    }
 }
